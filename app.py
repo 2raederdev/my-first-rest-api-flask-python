@@ -7,14 +7,16 @@ from resources.user import UserRegister
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 
-
 app = Flask(__name__)
+
+app.config['DEBUG'] = True
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = '4lm9ukpQ61HY0xlcZI6DTCKtNcuyuOeZ'
 api = Api(app)
 
-jwt = JWT(app, authenticate, identity)  # /auth
+jwt = JWT(app, authenticate, identity)
 
 api.add_resource(Store, '/store/<string:name>')
 api.add_resource(Item, '/item/<string:name>')
